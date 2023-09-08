@@ -12,7 +12,7 @@ composer require mage-os/mageos-async-events-admin-ui
 
 If you run into an error like "Could not find a version of package mage-os/mageos-async-events-admin-ui matching your minimum-stability (stable).", run this command instead:
 ```
-composer require mage-os/mageos-async-events-admin-ui
+composer require mage-os/mageos-async-events-admin-ui @dev
 ```
 
 Enable and install the module:
