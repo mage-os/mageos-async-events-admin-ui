@@ -22,3 +22,15 @@ bin/magento setup:upgrade
 
 ## Usage
 
+In the Async Events grid (Stores -> Asynchronous Events -> Subscribers) you now have the options to:
+* Create new subscriptions
+* Edit existing subscriptions
+* Delete existing subscriptions
+
+![grid.png](doc%2Fimages%2Fgrid.png)
+
+The form for editing or creating subscriptions looks like this:
+
+![form.png](doc/images/form.png)
+
+Please note that this module only supports HTTP subscriptions at the moment.
