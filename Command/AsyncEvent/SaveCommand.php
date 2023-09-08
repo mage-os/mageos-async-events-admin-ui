@@ -17,14 +17,16 @@ class SaveCommand
 {
     private LoggerInterface $logger;
     private AsyncEventResource $resource;
+    private EncryptorInterface $encryptor;
 
     public function __construct(
         LoggerInterface        $logger,
         AsyncEventResource     $resource,
-        private readonly EncryptorInterface $encryptor
+        EncryptorInterface     $encryptor
     ) {
         $this->logger = $logger;
         $this->resource = $resource;
+        $this->encryptor = $encryptor;
     }
 
     /**
