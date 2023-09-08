@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">async_events_events_form.async_events_events_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Asynchronous Event Subscriber</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <namespace>async_events_events_form</namespace>
+        <dataScope>data.general</dataScope>
+        <deps>
+            <dep>async_events_events_form.async_events_events_form_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="save" class="MageOS\AsyncEventsAdminUi\Block\Form\AsyncEvent\Save"/>
+            <button name="back" class="MageOS\AsyncEventsAdminUi\Block\Form\AsyncEvent\Back"/>
+            <button name="delete" class="MageOS\AsyncEventsAdminUi\Block\Form\AsyncEvent\Delete"/>
+        </buttons>
+    </settings>
+    <dataSource name="async_events_events_form_data_source" component="Magento_Ui/js/form/provider">
+        <settings>
+            <submitUrl path="async_events/asyncevent/save"/>
+        </settings>
+        <dataProvider class="MageOS\AsyncEventsAdminUi\Ui\DataProvider\AsyncEventDataProvider"
+                      name="async_events_events_form_data_source">
+            <settings>
+                <requestFieldName>subscription_id</requestFieldName>
+                <primaryFieldName>subscription_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <label translate="true">General</label>
+        </settings>
+        <field name="subscription_id" sortOrder="0" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">subscription_id</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Entity ID</label>
+                <dataScope>subscription_id</dataScope>
+            </settings>
+        </field>
+        <field name="event_name" sortOrder="00" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">event_name</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Event Name</label>
+                <dataScope>event_name</dataScope>
+            </settings>
+        </field>
+        <field name="recipient_url" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">recipient_url</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Recipient Url</label>
+                <dataScope>recipient_url</dataScope>
+            </settings>
+        </field>
+        <field name="verification_token" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">verification_token</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Verification Token</label>
+                <dataScope>verification_token</dataScope>
+            </settings>
+        </field>
+        <field name="status" sortOrder="30" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">status</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>bool</dataType>
+                <label translate="true">Status</label>
+                <dataScope>status</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="metadata" sortOrder="40" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">metadata</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Metadata</label>
+                <dataScope>metadata</dataScope>
+            </settings>
+        </field>
+        <field name="store_id" sortOrder="50" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">store_id</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>int</dataType>
+                <label translate="true">Store Id</label>
+                <dataScope>store_id</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+</form>

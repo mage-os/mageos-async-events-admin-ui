@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="async_event_subscriber" resource="default" engine="innodb" comment="AsyncEvent">
+        <column xsi:type="int" name="subscription_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Subscription Id Column"/>
+        <column xsi:type="varchar" name="event_name" nullable="false" length="255" comment="Event Name Column"/>
+        <column xsi:type="varchar" name="recipient_url" nullable="false" length="255" comment="Recipient Url Column"/>
+        <column xsi:type="varchar" name="verification_token" nullable="false" length="255"
+                comment="Verification Token Column"/>
+        <column xsi:type="boolean" name="status" nullable="false" comment="Status Column"/>
+        <column xsi:type="varchar" name="metadata" nullable="false" length="255" comment="Metadata Column"/>
+        <column xsi:type="int" name="store_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Store Id Column"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="subscription_id"/>
+        </constraint>
+        <index referenceId="ASYNC_EVENT_SUBSCRIBER_SUBSCRIPTION_ID" indexType="btree">
+            <column name="subscription_id"/>
+        </index>
+    </table>
+</schema>
