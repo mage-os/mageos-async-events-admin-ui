@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace MageOS\AsyncEventsAdminUi\Command\AsyncEvent;
 
 use Exception;
-use MageOS\AsyncEventsAdminUi\Api\Data\AsyncEventInterface;
-use MageOS\AsyncEventsAdminUi\Model\AsyncEventModel;
-use MageOS\AsyncEventsAdminUi\Model\AsyncEventModelFactory;
-use MageOS\AsyncEventsAdminUi\Model\ResourceModel\AsyncEventResource;
+use MageOS\AsyncEvents\Api\Data\AsyncEventInterface;
+use MageOS\AsyncEvents\Model\AsyncEvent as AsyncEventModel;
+use MageOS\AsyncEvents\Model\AsyncEventFactory as AsyncEventModelFactory;
+use MageOS\AsyncEvents\Model\ResourceModel\AsyncEvent as AsyncEventResource;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Psr\Log\LoggerInterface;
 
@@ -16,32 +16,15 @@ use Psr\Log\LoggerInterface;
  */
 class SaveCommand
 {
-    /**
-     * @var LoggerInterface
-     */
     private LoggerInterface $logger;
-
-    /**
-     * @var AsyncEventModelFactory
-     */
     private AsyncEventModelFactory $modelFactory;
-
-    /**
-     * @var AsyncEventResource
-     */
     private AsyncEventResource $resource;
 
-    /**
-     * @param LoggerInterface $logger
-     * @param AsyncEventModelFactory $modelFactory
-     * @param AsyncEventResource $resource
-     */
     public function __construct(
         LoggerInterface        $logger,
         AsyncEventModelFactory $modelFactory,
         AsyncEventResource     $resource
-    )
-    {
+    ) {
         $this->logger = $logger;
         $this->modelFactory = $modelFactory;
         $this->resource = $resource;
@@ -50,9 +33,6 @@ class SaveCommand
     /**
      * Save AsyncEvent.
      *
-     * @param AsyncEventInterface $asyncEvent
-     *
-     * @return int
      * @throws CouldNotSaveException
      */
     public function execute(AsyncEventInterface $asyncEvent): int
@@ -63,21 +43,21 @@ class SaveCommand
             $model->addData($asyncEvent->getData());
             $model->setHasDataChanges(true);
 
-            if (!$model->getData(AsyncEventInterface::SUBSCRIPTION_ID)) {
+            if (!$model->getSubscriptionId()) {
                 $model->isObjectNew(true);
             }
             $this->resource->save($model);
         } catch (Exception $exception) {
             $this->logger->error(
-                __('Could not save AsyncEvent. Original message: {message}'),
+                __('Could not save Asynchronous Event Subscriber. Original message: {message}'),
                 [
                     'message' => $exception->getMessage(),
                     'exception' => $exception
                 ]
             );
-            throw new CouldNotSaveException(__('Could not save AsyncEvent.'));
+            throw new CouldNotSaveException(__('Could not save Asynchronous Event Subscriber.'));
         }
 
-        return (int)$model->getData(AsyncEventInterface::SUBSCRIPTION_ID);
+        return (int)$model->getSubscriptionId();
     }
 }

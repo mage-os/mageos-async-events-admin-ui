@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New</label>
+            </button>
+        </buttons>
+    </settings>
+    <columns name="async_events_events_column">
+        <actionsColumn name="actions"
+                       class="MageOS\AsyncEventsAdminUi\Ui\Component\Listing\Column\AsyncEventBlockActions">
+            <settings>
+                <indexField>subscription_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

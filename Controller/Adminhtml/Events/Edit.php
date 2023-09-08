@@ -1,37 +1,37 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\AsyncEventsAdminUi\Controller\Adminhtml\AsyncEvent;
+namespace MageOS\AsyncEventsAdminUi\Controller\Adminhtml\Events;
 
 use Magento\Backend\App\Action;
+use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 
 /**
- * AsyncEvent backend index (list) controller.
+ * Edit AsyncEvent entity backend controller.
  */
-class Index extends Action implements HttpGetActionInterface
+class Edit extends Action implements HttpGetActionInterface
 {
     /**
      * Authorization level of a basic admin session.
+     *
+     * @see _isAllowed()
      */
     public const ADMIN_RESOURCE = 'MageOS_AsyncEvents::async_events_create';
 
     /**
-     * Execute action based on request and return result.
+     * Edit AsyncEvent action.
      *
-     * @return ResultInterface|ResponseInterface
+     * @return Page|ResultInterface
      */
     public function execute()
     {
+        /** @var Page $resultPage */
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-
         $resultPage->setActiveMenu('MageOS_AsyncEvents::index');
-        $resultPage->addBreadcrumb(__('AsyncEvent'), __('AsyncEvent'));
-        $resultPage->addBreadcrumb(__('Manage AsyncEvents'), __('Manage AsyncEvents'));
-        $resultPage->getConfig()->getTitle()->prepend(__('AsyncEvent List'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Edit Asynchronous Event Subscriber'));
 
         return $resultPage;
     }

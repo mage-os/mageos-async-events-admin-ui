@@ -22,7 +22,7 @@
     </settings>
     <dataSource name="async_events_events_form_data_source" component="Magento_Ui/js/form/provider">
         <settings>
-            <submitUrl path="async_events/asyncevent/save"/>
+            <submitUrl path="async_events/events/save"/>
         </settings>
         <dataProvider class="MageOS\AsyncEventsAdminUi\Ui\DataProvider\AsyncEventDataProvider"
                       name="async_events_events_form_data_source">
@@ -81,6 +81,7 @@
             <settings>
                 <dataType>string</dataType>
                 <label translate="true">Verification Token</label>
+                <notice translate="true">Leave empty to auto-generate</notice>
                 <dataScope>verification_token</dataScope>
             </settings>
         </field>
@@ -92,7 +93,7 @@
             </argument>
             <settings>
                 <dataType>bool</dataType>
-                <label translate="true">Status</label>
+                <label translate="true">Enabled</label>
                 <dataScope>status</dataScope>
             </settings>
             <formElements>
@@ -115,7 +116,7 @@
             </argument>
             <settings>
                 <dataType>string</dataType>
-                <label translate="true">Metadata</label>
+                <label translate="true">Notifier</label>
                 <dataScope>metadata</dataScope>
             </settings>
         </field>
@@ -127,7 +128,7 @@
             </argument>
             <settings>
                 <dataType>int</dataType>
-                <label translate="true">Store Id</label>
+                <label translate="true">Store</label>
                 <dataScope>store_id</dataScope>
             </settings>
         </field>

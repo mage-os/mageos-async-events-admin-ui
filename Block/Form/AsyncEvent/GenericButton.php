@@ -3,56 +3,31 @@ declare(strict_types=1);
 
 namespace MageOS\AsyncEventsAdminUi\Block\Form\AsyncEvent;
 
-use MageOS\AsyncEventsAdminUi\Api\Data\AsyncEventInterface;
 use Magento\Backend\Block\Widget\Context;
 use Magento\Framework\UrlInterface;
 
 /**
- * Generic (form) button for AsyncEvent entity.
+ * Generic (form) button for Asynchronous Event Subscriber entity.
  */
 class GenericButton
 {
-    /**
-     * @var Context
-     */
     private Context $context;
-
-    /**
-     * @var UrlInterface
-     */
     private UrlInterface $urlBuilder;
 
-    /**
-     * @param Context $context
-     */
     public function __construct(
         Context $context
-    )
-    {
+    ) {
         $this->context = $context;
         $this->urlBuilder = $context->getUrlBuilder();
     }
 
-    /**
-     * Get AsyncEvent entity id.
-     *
-     * @return int
-     */
     public function getSubscriptionId(): int
     {
-        return (int)$this->context->getRequest()->getParam(AsyncEventInterface::SUBSCRIPTION_ID);
+        return (int)$this->context->getRequest()->getParam('subscription_id');
     }
 
     /**
-     * Wrap button specific options to settings array.
-     *
-     * @param string $label
-     * @param string $class
-     * @param string $onclick
-     * @param array $dataAttribute
-     * @param int $sortOrder
-     *
-     * @return array
+     * Wrap button specific options to settings array
      */
     protected function wrapButtonSettings(
         string $label,
@@ -60,8 +35,7 @@ class GenericButton
         string $onclick = '',
         array  $dataAttribute = [],
         int    $sortOrder = 0
-    ): array
-    {
+    ): array {
         return [
             'label' => $label,
             'on_click' => $onclick,
@@ -71,14 +45,6 @@ class GenericButton
         ];
     }
 
-    /**
-     * Get url.
-     *
-     * @param string $route
-     * @param array $params
-     *
-     * @return string
-     */
     protected function getUrl(string $route, array $params = []): string
     {
         return $this->urlBuilder->getUrl($route, $params);

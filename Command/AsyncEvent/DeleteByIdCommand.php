@@ -4,10 +4,9 @@ declare(strict_types=1);
 namespace MageOS\AsyncEventsAdminUi\Command\AsyncEvent;
 
 use Exception;
-use MageOS\AsyncEventsAdminUi\Api\Data\AsyncEventInterface;
-use MageOS\AsyncEventsAdminUi\Model\AsyncEventModel;
-use MageOS\AsyncEventsAdminUi\Model\AsyncEventModelFactory;
-use MageOS\AsyncEventsAdminUi\Model\ResourceModel\AsyncEventResource;
+use MageOS\AsyncEvents\Model\AsyncEvent as AsyncEventModel;
+use MageOS\AsyncEvents\Model\AsyncEventFactory as AsyncEventModelFactory;
+use MageOS\AsyncEvents\Model\ResourceModel\AsyncEvent as AsyncEventResource;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
@@ -17,32 +16,15 @@ use Psr\Log\LoggerInterface;
  */
 class DeleteByIdCommand
 {
-    /**
-     * @var LoggerInterface
-     */
     private LoggerInterface $logger;
-
-    /**
-     * @var AsyncEventModelFactory
-     */
     private AsyncEventModelFactory $modelFactory;
-
-    /**
-     * @var AsyncEventResource
-     */
     private AsyncEventResource $resource;
 
-    /**
-     * @param LoggerInterface $logger
-     * @param AsyncEventModelFactory $modelFactory
-     * @param AsyncEventResource $resource
-     */
     public function __construct(
         LoggerInterface        $logger,
         AsyncEventModelFactory $modelFactory,
         AsyncEventResource     $resource
-    )
-    {
+    ) {
         $this->logger = $logger;
         $this->modelFactory = $modelFactory;
         $this->resource = $resource;
@@ -51,9 +33,6 @@ class DeleteByIdCommand
     /**
      * Delete AsyncEvent.
      *
-     * @param int $entityId
-     *
-     * @return void
      * @throws CouldNotDeleteException
      */
     public function execute(int $entityId): void
@@ -61,13 +40,14 @@ class DeleteByIdCommand
         try {
             /** @var AsyncEventModel $model */
             $model = $this->modelFactory->create();
-            $this->resource->load($model, $entityId, AsyncEventInterface::SUBSCRIPTION_ID);
+            $this->resource->load($model, $entityId);
 
-            if (!$model->getData(AsyncEventInterface::SUBSCRIPTION_ID)) {
+            if (!$model->getSubscriptionId()) {
                 throw new NoSuchEntityException(
-                    __('Could not find AsyncEvent with id: `%id`',
+                    __(
+                        'Could not find Asynchronous Event Subscriber with id: `%subscription_id`',
                         [
-                            'id' => $entityId
+                            'subscription_id' => $entityId
                         ]
                     )
                 );
@@ -76,13 +56,13 @@ class DeleteByIdCommand
             $this->resource->delete($model);
         } catch (Exception $exception) {
             $this->logger->error(
-                __('Could not delete AsyncEvent. Original message: {message}'),
+                __('Could not delete Asynchronous Event Subscriber. Original message: {message}'),
                 [
                     'message' => $exception->getMessage(),
                     'exception' => $exception
                 ]
             );
-            throw new CouldNotDeleteException(__('Could not delete AsyncEvent.'));
+            throw new CouldNotDeleteException(__('Could not delete Asynchronous Event Subscriber.'));
         }
     }
 }

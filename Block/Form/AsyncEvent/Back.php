@@ -12,8 +12,6 @@ class Back extends GenericButton implements ButtonProviderInterface
 {
     /**
      * Retrieve Back To Grid button settings.
-     *
-     * @return array
      */
     public function getButtonData(): array
     {

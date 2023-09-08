@@ -12,8 +12,6 @@ class Save extends GenericButton implements ButtonProviderInterface
 {
     /**
      * Retrieve Save button settings.
-     *
-     * @return array
      */
     public function getButtonData(): array
     {

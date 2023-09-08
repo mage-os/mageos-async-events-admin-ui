@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MageOS\AsyncEventsAdminUi\Controller\Adminhtml\AsyncEvent;
+namespace MageOS\AsyncEventsAdminUi\Controller\Adminhtml\Events;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\Model\View\Result\Page;
@@ -10,9 +10,9 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 
 /**
- * Edit AsyncEvent entity backend controller.
+ * New action AsyncEvent controller.
  */
-class Edit extends Action implements HttpGetActionInterface
+class NewAction extends Action implements HttpGetActionInterface
 {
     /**
      * Authorization level of a basic admin session.
@@ -22,7 +22,7 @@ class Edit extends Action implements HttpGetActionInterface
     public const ADMIN_RESOURCE = 'MageOS_AsyncEvents::async_events_create';
 
     /**
-     * Edit AsyncEvent action.
+     * Create new AsyncEvent action.
      *
      * @return Page|ResultInterface
      */
@@ -31,7 +31,7 @@ class Edit extends Action implements HttpGetActionInterface
         /** @var Page $resultPage */
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->setActiveMenu('MageOS_AsyncEvents::index');
-        $resultPage->getConfig()->getTitle()->prepend(__('Edit AsyncEvent'));
+        $resultPage->getConfig()->getTitle()->prepend(__('New Asynchronous Event Subscriber'));
 
         return $resultPage;
     }

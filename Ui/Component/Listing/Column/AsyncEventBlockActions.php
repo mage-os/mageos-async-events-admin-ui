@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace MageOS\AsyncEventsAdminUi\Ui\Component\Listing\Column;
 
-use MageOS\AsyncEventsAdminUi\Api\Data\AsyncEventInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
@@ -17,34 +16,23 @@ class AsyncEventBlockActions extends Column
     /**
      * Entity name.
      */
-    private const ENTITY_NAME = 'AsyncEvent';
+    private const ENTITY_NAME = 'Asynchronous Event Subscriber';
 
     /**
      * Url paths.
      */
-    private const EDIT_URL_PATH = 'async_events/asyncevent/edit';
-    private const DELETE_URL_PATH = 'async_events/asyncevent/delete';
+    private const EDIT_URL_PATH = 'async_events/events/edit';
+    private const DELETE_URL_PATH = 'async_events/events/delete';
 
-    /**
-     * @var UrlInterface
-     */
     private UrlInterface $urlBuilder;
 
-    /**
-     * @param ContextInterface $context
-     * @param UiComponentFactory $uiComponentFactory
-     * @param UrlInterface $urlBuilder
-     * @param array $components
-     * @param array $data
-     */
     public function __construct(
         ContextInterface   $context,
         UiComponentFactory $uiComponentFactory,
         UrlInterface       $urlBuilder,
         array              $components = [],
         array              $data = []
-    )
-    {
+    ) {
         parent::__construct(
             $context,
             $uiComponentFactory,
@@ -54,20 +42,13 @@ class AsyncEventBlockActions extends Column
         $this->urlBuilder = $urlBuilder;
     }
 
-    /**
-     * Prepare data source.
-     *
-     * @param array $dataSource
-     *
-     * @return array
-     */
     public function prepareDataSource(array $dataSource): array
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
-                if (isset($item[AsyncEventInterface::SUBSCRIPTION_ID])) {
+                if (isset($item['subscription_id'])) {
                     $entityName = static::ENTITY_NAME;
-                    $urlData = [AsyncEventInterface::SUBSCRIPTION_ID => $item[AsyncEventInterface::SUBSCRIPTION_ID]];
+                    $urlData = ['subscription_id' => $item['subscription_id']];
 
                     $editUrl = $this->urlBuilder->getUrl(static::EDIT_URL_PATH, $urlData);
                     $deleteUrl = $this->urlBuilder->getUrl(static::DELETE_URL_PATH, $urlData);

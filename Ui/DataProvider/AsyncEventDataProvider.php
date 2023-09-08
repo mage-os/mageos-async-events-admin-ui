@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace MageOS\AsyncEventsAdminUi\Ui\DataProvider;
 
-use MageOS\AsyncEventsAdminUi\Api\Data\AsyncEventInterface;
+use Magento\Framework\Api\Search\SearchResultInterface;
 use MageOS\AsyncEventsAdminUi\Query\AsyncEvent\GetListQuery;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\ReportingInterface;
@@ -17,34 +17,10 @@ use Magento\Ui\DataProvider\SearchResultFactory;
  */
 class AsyncEventDataProvider extends DataProvider
 {
-    /**
-     * @var GetListQuery
-     */
     private GetListQuery $getListQuery;
-
-    /**
-     * @var SearchResultFactory
-     */
     private SearchResultFactory $searchResultFactory;
+    private array $loadedData = [];
 
-    /**
-     * @var array
-     */
-    private $loadedData = [];
-
-    /**
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
-     * @param ReportingInterface $reporting
-     * @param SearchCriteriaBuilder $searchCriteriaBuilder
-     * @param RequestInterface $request
-     * @param FilterBuilder $filterBuilder
-     * @param GetListQuery $getListQuery
-     * @param SearchResultFactory $searchResultFactory
-     * @param array $meta
-     * @param array $data
-     */
     public function __construct(
         $name,
         $primaryFieldName,
@@ -57,8 +33,7 @@ class AsyncEventDataProvider extends DataProvider
         SearchResultFactory $searchResultFactory,
         array $meta = [],
         array $data = []
-    )
-    {
+    ) {
         parent::__construct(
             $name,
             $primaryFieldName,
@@ -77,7 +52,7 @@ class AsyncEventDataProvider extends DataProvider
     /**
      * Returns searching result.
      *
-     * @return SearchResultFactory
+     * @return SearchResultInterface
      */
     public function getSearchResult()
     {
@@ -88,7 +63,7 @@ class AsyncEventDataProvider extends DataProvider
             $result->getItems(),
             $result->getTotalCount(),
             $searchCriteria,
-            AsyncEventInterface::SUBSCRIPTION_ID
+            'subscription_id'
         );
     }
 
@@ -106,10 +81,10 @@ class AsyncEventDataProvider extends DataProvider
         $itemsById = [];
 
         foreach ($this->loadedData['items'] as $item) {
-            $itemsById[(int)$item[AsyncEventInterface::SUBSCRIPTION_ID]] = $item;
+            $itemsById[(int)$item['subscription_id']] = $item;
         }
 
-        if ($id = $this->request->getParam(AsyncEventInterface::SUBSCRIPTION_ID)) {
+        if ($id = $this->request->getParam('subscription_id')) {
             $this->loadedData['entity'] = $itemsById[(int)$id];
         }
 

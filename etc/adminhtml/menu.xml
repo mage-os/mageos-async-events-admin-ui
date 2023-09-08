@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
-    <menu>
-        <add id="MageOS_AsyncEvents::index" sortOrder="10" title="Subscribers" module="MageOS_AsyncEventsAdminUi"
-             parent="MageOS_AsyncEvents::integrations" resource="MageOS_AsyncEvents::async_events_create"
-             translate="title" action="async_events/asyncevent/index"/>
-    </menu>
-</config>
