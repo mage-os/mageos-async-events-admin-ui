@@ -72,19 +72,6 @@
                 <dataScope>recipient_url</dataScope>
             </settings>
         </field>
-        <field name="verification_token" sortOrder="20" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">verification_token</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>string</dataType>
-                <label translate="true">Verification Token</label>
-                <notice translate="true">Leave empty to auto-generate</notice>
-                <dataScope>verification_token</dataScope>
-            </settings>
-        </field>
         <field name="status" sortOrder="30" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

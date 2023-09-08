@@ -12,7 +12,6 @@ use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\DataObject;
 use Magento\Framework\Exception\CouldNotSaveException;
 
 /**
@@ -29,7 +28,7 @@ class Save extends Action implements HttpPostActionInterface
 
     private DataPersistorInterface $dataPersistor;
     private SaveCommand $saveCommand;
-    private AsyncEventInterfaceFactory $entityDataFactory;
+    private AsyncEventInterfaceFactory $asyncEventFactory;
 
     public function __construct(
         Context                    $context,
@@ -40,7 +39,7 @@ class Save extends Action implements HttpPostActionInterface
         parent::__construct($context);
         $this->dataPersistor = $dataPersistor;
         $this->saveCommand = $saveCommand;
-        $this->entityDataFactory = $entityDataFactory;
+        $this->asyncEventFactory = $entityDataFactory;
     }
 
     /**
@@ -52,11 +51,17 @@ class Save extends Action implements HttpPostActionInterface
     {
         $resultRedirect = $this->resultRedirectFactory->create();
         $params = $this->getRequest()->getParams();
+        if (isset($params['general'])) {
+            $params = $params['general'];
+        }
+        if ($params['subscription_id'] === '') {
+            unset($params['subscription_id']);
+        }
 
         try {
-            /** @var AsyncEventInterface|DataObject $entityModel */
-            $entityModel = $this->entityDataFactory->create();
-            $entityModel->addData($params['general']);
+            /** @var AsyncEventInterface $entityModel */
+            $entityModel = $this->asyncEventFactory->create();
+            $entityModel->addData($params);
             $this->saveCommand->execute($entityModel);
             $this->messageManager->addSuccessMessage(
                 __('The Asynchronous Event Subscriber data was saved successfully')
