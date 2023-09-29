@@ -22,7 +22,6 @@ class AsyncEventBlockActions extends Column
      * Url paths.
      */
     private const EDIT_URL_PATH = 'async_events/events/edit';
-    private const DELETE_URL_PATH = 'async_events/events/delete';
 
     private UrlInterface $urlBuilder;
 
@@ -51,16 +50,9 @@ class AsyncEventBlockActions extends Column
                     $urlData = ['subscription_id' => $item['subscription_id']];
 
                     $editUrl = $this->urlBuilder->getUrl(static::EDIT_URL_PATH, $urlData);
-                    $deleteUrl = $this->urlBuilder->getUrl(static::DELETE_URL_PATH, $urlData);
 
                     $item[$this->getData('name')] = [
                         'edit' => $this->getActionData($editUrl, (string)__('Edit')),
-                        'delete' => $this->getActionData(
-                            $deleteUrl,
-                            (string)__('Delete'),
-                            (string)__('Delete %1', $entityName),
-                            (string)__('Are you sure you want to delete a %1 record?', $entityName)
-                        )
                     ];
                 }
             }

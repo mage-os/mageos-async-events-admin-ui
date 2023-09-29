@@ -25,12 +25,13 @@ bin/magento setup:upgrade
 In the Async Events grid (Stores -> Asynchronous Events -> Subscribers) you now have the options to:
 * Create new subscriptions
 * Edit existing subscriptions
-* Delete existing subscriptions
 
 ![grid.png](doc%2Fimages%2Fgrid.png)
 
 The form for editing or creating subscriptions looks like this:
 
 ![form.png](doc/images/form.png)
+
+Deleting subscriptions via Admin Interface is not possible due to [security reasons](https://github.com/mage-os/mageos-async-events-admin-ui/pull/1#issuecomment-1718979600).
 
 Please note that this module only supports HTTP subscriptions at the moment.

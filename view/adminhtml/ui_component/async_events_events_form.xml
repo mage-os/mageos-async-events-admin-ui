@@ -17,7 +17,6 @@
         <buttons>
             <button name="save" class="MageOS\AsyncEventsAdminUi\Block\Form\AsyncEvent\Save"/>
             <button name="back" class="MageOS\AsyncEventsAdminUi\Block\Form\AsyncEvent\Back"/>
-            <button name="delete" class="MageOS\AsyncEventsAdminUi\Block\Form\AsyncEvent\Delete"/>
         </buttons>
     </settings>
     <dataSource name="async_events_events_form_data_source" component="Magento_Ui/js/form/provider">
