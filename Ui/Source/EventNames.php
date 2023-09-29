@@ -7,12 +7,9 @@ use MageOS\AsyncEventsAdminUi\Model\Config;
 
 class EventNames implements \Magento\Framework\Option\ArrayInterface
 {
-    private Config $config;
-
     public function __construct(
-        Config $config
+        private readonly Config $config
     ) {
-        $this->config = $config;
     }
 
     public function toOptionArray()

@@ -23,12 +23,10 @@ class AsyncEventBlockActions extends Column
      */
     private const EDIT_URL_PATH = 'async_events/events/edit';
 
-    private UrlInterface $urlBuilder;
-
     public function __construct(
         ContextInterface   $context,
         UiComponentFactory $uiComponentFactory,
-        UrlInterface       $urlBuilder,
+        private readonly UrlInterface $urlBuilder,
         array              $components = [],
         array              $data = []
     ) {
@@ -38,7 +36,6 @@ class AsyncEventBlockActions extends Column
             $components,
             $data
         );
-        $this->urlBuilder = $urlBuilder;
     }
 
     public function prepareDataSource(array $dataSource): array

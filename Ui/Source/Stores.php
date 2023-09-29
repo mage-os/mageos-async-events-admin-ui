@@ -8,12 +8,9 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class Stores implements \Magento\Framework\Option\ArrayInterface
 {
-    private StoreManagerInterface $storeManager;
-
     public function __construct(
-        StoreManagerInterface $storeManager
+        private readonly StoreManagerInterface $storeManager
     ) {
-        $this->storeManager = $storeManager;
     }
 
     public function toOptionArray()

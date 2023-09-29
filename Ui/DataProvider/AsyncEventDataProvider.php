@@ -17,8 +17,6 @@ use Magento\Ui\DataProvider\SearchResultFactory;
  */
 class AsyncEventDataProvider extends DataProvider
 {
-    private GetListQuery $getListQuery;
-    private SearchResultFactory $searchResultFactory;
     private array $loadedData = [];
 
     public function __construct(
@@ -29,8 +27,8 @@ class AsyncEventDataProvider extends DataProvider
         SearchCriteriaBuilder $searchCriteriaBuilder,
         RequestInterface $request,
         FilterBuilder $filterBuilder,
-        GetListQuery $getListQuery,
-        SearchResultFactory $searchResultFactory,
+        private readonly GetListQuery $getListQuery,
+        private readonly SearchResultFactory $searchResultFactory,
         array $meta = [],
         array $data = []
     ) {
@@ -45,8 +43,6 @@ class AsyncEventDataProvider extends DataProvider
             $meta,
             $data
         );
-        $this->getListQuery = $getListQuery;
-        $this->searchResultFactory = $searchResultFactory;
     }
 
     /**

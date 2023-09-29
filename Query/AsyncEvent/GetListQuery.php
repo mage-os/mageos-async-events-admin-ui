@@ -16,21 +16,12 @@ use Magento\Framework\Api\SearchResultsInterfaceFactory;
  */
 class GetListQuery
 {
-    private CollectionProcessorInterface $collectionProcessor;
-    private AsyncEventCollectionFactory $entityCollectionFactory;
-    private SearchCriteriaBuilder $searchCriteriaBuilder;
-    private SearchResultsInterfaceFactory $searchResultFactory;
-
     public function __construct(
-        CollectionProcessorInterface  $collectionProcessor,
-        AsyncEventCollectionFactory   $entityCollectionFactory,
-        SearchCriteriaBuilder         $searchCriteriaBuilder,
-        SearchResultsInterfaceFactory $searchResultFactory
+        private readonly CollectionProcessorInterface  $collectionProcessor,
+        private readonly AsyncEventCollectionFactory   $entityCollectionFactory,
+        private readonly SearchCriteriaBuilder         $searchCriteriaBuilder,
+        private readonly SearchResultsInterfaceFactory $searchResultFactory
     ) {
-        $this->collectionProcessor = $collectionProcessor;
-        $this->entityCollectionFactory = $entityCollectionFactory;
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
-        $this->searchResultFactory = $searchResultFactory;
     }
 
     /**

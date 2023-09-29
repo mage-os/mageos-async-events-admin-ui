@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MageOS\AsyncEventsAdminUi\Block\Form\AsyncEvent;
 
 use Magento\Backend\Block\Widget\Context;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\UrlInterface;
 
 /**
@@ -11,19 +12,19 @@ use Magento\Framework\UrlInterface;
  */
 class GenericButton
 {
-    private Context $context;
     private UrlInterface $urlBuilder;
+    private RequestInterface $request;
 
     public function __construct(
         Context $context
     ) {
-        $this->context = $context;
         $this->urlBuilder = $context->getUrlBuilder();
+        $this->request = $context->getRequest();
     }
 
     public function getSubscriptionId(): int
     {
-        return (int)$this->context->getRequest()->getParam('subscription_id');
+        return (int)$this->request->getParam('subscription_id');
     }
 
     /**

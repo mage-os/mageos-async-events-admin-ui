@@ -7,12 +7,9 @@ use Magento\Framework\Config\DataInterface;
 
 class Config
 {
-    private DataInterface $dataStorage;
-
     public function __construct(
-        DataInterface $dataStorage
+        private readonly DataInterface $dataStorage
     ) {
-        $this->dataStorage = $dataStorage;
     }
 
     /**

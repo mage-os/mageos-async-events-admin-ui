@@ -15,18 +15,11 @@ use Psr\Log\LoggerInterface;
  */
 class SaveCommand
 {
-    private LoggerInterface $logger;
-    private AsyncEventResource $resource;
-    private EncryptorInterface $encryptor;
-
     public function __construct(
-        LoggerInterface        $logger,
-        AsyncEventResource     $resource,
-        EncryptorInterface     $encryptor
+        private readonly LoggerInterface    $logger,
+        private readonly AsyncEventResource $resource,
+        private readonly EncryptorInterface $encryptor
     ) {
-        $this->logger = $logger;
-        $this->resource = $resource;
-        $this->encryptor = $encryptor;
     }
 
     /**
