@@ -3,7 +3,7 @@
   "description": "Add event subscriptions for the Mage-OS Async Events module via an admin form instead of using REST requests.",
   "type": "magento2-module",
   "require": {
-    "php":  ">=7.4",
+    "php":  ">=8.1",
     "magento/framework": "*",
     "mage-os/mageos-async-events": "*"
   },
